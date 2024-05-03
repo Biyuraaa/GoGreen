@@ -41,7 +41,7 @@
         <div class="main-footer">
           <div class="container">
             <div class="row">
-              <div class="col-md-3 col-sm-6 col-xs-12 footer-column">
+              <div class="col-md-4 col-sm-6 col-xs-12 footer-column">
                 <div class="logo-wideget footer-wideget">
                   <div class="footer-logo">
                     <a href="index.html"
@@ -92,44 +92,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12 footer-column">
-                <div class="gallery-wideget footer-wideget">
-                  <div class="footer-title">Photo Gallery</div>
-                  <ul class="img-list clearfix">
-                    <li>
-                      <a href="gallery.html"
-                        ><figure><img src="{{asset('assets/images/footer/1.jpg')}}" alt="" /></figure
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="gallery.html"
-                        ><figure><img src="{{asset('assets/images/footer/2.jpg')}}" alt="" /></figure
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="gallery.html"
-                        ><figure><img src="{{asset('assets/images/footer/3.jpg')}}" alt="" /></figure
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="gallery.html"
-                        ><figure><img src="{{asset('assets/images/footer/4.jpg')}}" alt="" /></figure
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="gallery.html"
-                        ><figure><img src="{{asset('assets/images/footer/5.jpg')}}" alt="" /></figure
-                      ></a>
-                    </li>
-                    <li>
-                      <a href="gallery.html"
-                        ><figure><img src="{{asset('assets/images/footer/6.jpg')}}" alt="" /></figure
-                      ></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-2 col-sm-6 col-xs-12 footer-column">
+              <div class="col-md-4 col-sm-6 col-xs-12 footer-column">
                 <div class="link-wideget footer-wideget">
                   <div class="footer-title">Quick links</div>
                   <ul class="list">

@@ -41,6 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/blog', function () {
+        return view('blog');
+    })->name('blog');
+});
+
 Route::get('/logout', [UserController::class, 'doLogout'])->name('doLogout');
 
 // Route::controller(UserController::class)->group(function () {

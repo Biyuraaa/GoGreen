@@ -702,7 +702,7 @@
             <div class="lower-content">
               <div class="meta">Ecology</div>
               <h5>
-                <a href="blog-details.html">How to save animals in future</a>
+                <a href="{{route('blog')}}">How to save animals in future</a>
               </h5>
               <div class="text">
                 <p>
