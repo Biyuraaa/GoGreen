@@ -5,155 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>GOGREEN</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
   <link rel="icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon" />
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 </head>
 <body class="page-wrapper">
-  @include('layouts.header')
+  @include('components.header')
   @yield('title')
   @yield('content')
-  @include('layouts.footer')
+  @include('components.footer')
   @include('helper.js')
-  <div id="donate-popup" class="donate-popup">
-      <div class="close-donate theme-btn">
-        <span class="fa fa-close"></span>
-      </div>
-      <div class="popup-inner">
-        <div class="container">
-          <div class="donate-form-area">
-            <h2>Donation Information</h2>
-            <h4>How much would you like to donate:</h4>
-            <form action="#" class="donate-form default-form">
-              <ul class="chicklet-list clearfix">
-                <li>
-                  <input
-                    type="radio"
-                    id="donate-amount-1"
-                    name="donate-amount"
-                  />
-                  <label for="donate-amount-1" data-amount="1000">$1000</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="donate-amount-2"
-                    name="donate-amount"
-                    checked="checked"
-                  />
-                  <label for="donate-amount-2" data-amount="2000">$2000</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="donate-amount-3"
-                    name="donate-amount"
-                  />
-                  <label for="donate-amount-3" data-amount="3000">$3000</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="donate-amount-4"
-                    name="donate-amount"
-                  />
-                  <label for="donate-amount-4" data-amount="4000">$4000</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    id="donate-amount-5"
-                    name="donate-amount"
-                  />
-                  <label for="donate-amount-5" data-amount="5000">$5000</label>
-                </li>
-                <li class="other-amount">
-                  <div
-                    class="input-container"
-                    data-message="Every dollar you donate helps end hunger."
-                  >
-                    <span>Or</span
-                    ><input
-                      type="text"
-                      id="other-amount"
-                      placeholder="Other Amount"
-                    />
-                  </div>
-                </li>
-              </ul>
-              <h3>Donor Information</h3>
-              <div class="form-bg">
-                <div class="row clearfix">
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                      <p>Your Name*</p>
-                      <input type="text" name="fname" placeholder="" />
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                      <p>Email*</p>
-                      <input type="text" name="fname" placeholder="" />
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                      <p>Address*</p>
-                      <input type="text" name="fname" placeholder="" />
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                      <p>Phn Num*</p>
-                      <input type="text" name="fname" placeholder="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <ul class="payment-option">
-                <li>
-                  <h4>Choose your payment method:</h4>
-                </li>
-                <li>
-                  <div class="checkbox">
-                    <label>
-                      <input name="pay-us" type="checkbox" />
-                      <span>Paypal</span>
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div class="checkbox">
-                    <label>
-                      <input name="pay-us" type="checkbox" />
-                      <span>Offline Donation</span>
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div class="checkbox">
-                    <label>
-                      <input name="pay-us" type="checkbox" />
-                      <span>Credit Card</span>
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <div class="checkbox">
-                    <label>
-                      <input name="pay-us" type="checkbox" />
-                      <span>Debit Card</span>
-                    </label>
-                  </div>
-                </li>
-              </ul>
-              <div class="center">
-                <button class="btn-one" type="submit">Donate Now</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

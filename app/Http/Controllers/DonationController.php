@@ -6,6 +6,9 @@ use App\Models\Donation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
+use App\Models\Transaction;
+use App\Models\Wallet;
+use Illuminate\Support\Facades\Log;
 
 class DonationController extends Controller
 {
@@ -15,7 +18,9 @@ class DonationController extends Controller
     public function index()
     {
         //
-        return view('dashboard.donations.index', ['donations' => Donation::all()]);
+        $totalDonations = Transaction::where('type', 'donation')->sum('amount');
+        $donations = Donation::all();
+        return view('dashboard.donations.index', compact('donations', 'totalDonations'));
     }
 
     /**
@@ -31,15 +36,46 @@ class DonationController extends Controller
      */
     public function store(StoreDonationRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        $wallet = Wallet::find($request->wallet_id);
+
+        if ($wallet->balance < $validatedData['amount']) {
+            return redirect()->back()->with('error', 'Insufficient funds');
+        }
+
+        $donation = Donation::create([
+            'amount' => $validatedData['amount'],
+            'wallet_id' => $request->wallet_id,
+        ]);
+        Log::info('Donation successful', ['donation' => $donation]);
+
+        Transaction::create([
+            'amount' => $validatedData['amount'],
+            'wallet_id' => $request->wallet_id,
+            'donation_id' => $donation->id,
+        ]);
+
+
+        $wallet->update([
+            'balance' => $wallet->balance - $validatedData['amount'],
+        ]);
+
+        return redirect()->route('wallets.index')->with('success', 'Donation successful');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Donation $donation)
     {
-        //
+        // Ambil data user dari wallet terkait
+        $user = $donation->wallet->user;
+        // Ambil data blog terkait
+        $blog = $donation->blog;
+
+        return view('dashboard.donations.show', compact('donation', 'user', 'blog'));
     }
 
     /**

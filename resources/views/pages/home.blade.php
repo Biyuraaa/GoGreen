@@ -273,7 +273,7 @@
           <div class="row">
             <div class="col-md-5 col-sm-6 col-xs-12 about-column">
               <div class="left-content text-right">
-                <div class="top-title">3500+ volunteer</div>
+                <div class="top-title">{{$users->count()}}+ volunteer</div>
                 <div class="title">People working with us since 1975!!</div>
               </div>
             </div>
@@ -702,7 +702,7 @@
             <div class="lower-content">
               <div class="meta">Ecology</div>
               <h5>
-                <a href="{{route('blog')}}">How to save animals in future</a>
+                <a href="{{route('blogs.index')}}">How to save animals in future</a>
               </h5>
               <div class="text">
                 <p>

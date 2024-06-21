@@ -3,15 +3,17 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreDonationRequest extends FormRequest
 {
+    protected $model = 'App\Models\Donation';
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +24,8 @@ class StoreDonationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => ['required', 'integer', 'min:0'],
+            'wallet_id' => ['required', 'exists:wallets,id'],
         ];
     }
 }

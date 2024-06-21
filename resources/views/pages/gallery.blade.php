@@ -1,11 +1,11 @@
 @extends('layouts.template')
-@section('titles')
+@section('title')
   <section class="page-title">
       <div class="container">
         <div class="content-box">
           <div class="title">Gallery</div>
           <div class="bread-crumb">
-            <a href="index.html">Home &nbsp;</a> /&nbsp;<span>Gallery</span>
+            <a href="">Home &nbsp;</a> /&nbsp;<span>Gallery</span>
           </div>
         </div>
       </div>

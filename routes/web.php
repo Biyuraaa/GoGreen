@@ -7,45 +7,48 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\CheckAdmin;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Str;
+use App\Http\Controllers\WalletController;
 use App\Models\User;
 
 
 Route::controller(PagesController::class)->group(function () {
     Route::get('/', 'home')->name('home');
-    Route::get('/home', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
     Route::get('/services', 'services')->name('services');
     Route::get('/gallery', 'gallery')->name('gallery');
     Route::get('/contact', 'contact')->name('contact');
-    Route::get('/blog', 'blog')->name('blog');
 });
 
-Route::middleware(['auth', 'verified', CheckAdmin::class])->prefix('dashboard')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard.index', ['users' => User::all()]);
-    })->name('dashboard');
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('blogs', BlogController::class);
-    Route::resource('donations', DonationController::class);
+    Route::post('/blogs/{blog}', [BlogController::class, 'donation'])->name('blogs.donation');
+    Route::resource('donations', DonationController::class)->except('store');
     Route::resource('galleries', GalleryController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('comments', CommentController::class);
+    Route::get('/wallets/deposit', [WalletController::class, 'deposit'])->name('wallets.deposit');
+    Route::post('/wallets/deposit', [WalletController::class, 'storeDeposit'])->name('wallets.storeDeposit');
+    Route::resource('wallets', WalletController::class);
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/donations', [DonationController::class, 'store'])->name('donations.store');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/blog', function () {
-        return view('blog');
-    })->name('blog');
-});
 
 Route::get('/logout', [UserController::class, 'doLogout'])->name('doLogout');
 

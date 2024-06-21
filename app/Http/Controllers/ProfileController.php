@@ -8,15 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
+    public function index()
+    {
+        $user = Auth::user();
+        return view('pages.profile.index', compact('user'));
+    }
     /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('pages.profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -26,15 +32,32 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            $oldImage = public_path('assets/images/users/' . $user->image);
+            if ($user->image && file_exists($oldImage)) {
+                unlink($oldImage);
+            }
+
+            // Store new image
+            $image = $request->file('image');
+            $imageName = strtolower(str_replace(' ', '_', $user->name)) . '_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/images/users/'), $imageName);
+
+            // Update user's image path in the database
+            $user->image = $imageName;
         }
 
-        $request->user()->save();
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $user->save();
+
+        return Redirect::route('profile.index')->with('status', 'profile-updated');
     }
 
     /**

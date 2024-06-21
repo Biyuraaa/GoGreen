@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Blog;
 
 
 class PagesController extends Controller
 {
     public function home()
     {
-        return view('pages.home');
+        $users = User::all();
+        return view('pages.home', compact('users'));
     }
 
     public function about()
@@ -30,7 +33,8 @@ class PagesController extends Controller
 
     public function blog()
     {
-        return view('pages.blog');
+        $blogs = Blog::all();
+        return view('pages.blog', compact('blogs'));
     }
 
     public function contact()
